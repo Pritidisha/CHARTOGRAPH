@@ -28,28 +28,35 @@ if uploaded_file is not None:
         ["Line Chart", "Bar Chart", "Scatter Plot", "Histogram", "Box Plot"]
     )
 
-    x_axis = st.selectbox("Select X-axis", columns)
-    y_axis = st.selectbox("Select Y-axis", columns)
 
     if chart_type == "Line Chart":
+        x_axis = st.selectbox("Select X-axis", columns)
+        y_axis = st.selectbox("Select Y-axis", columns)
         fig = px.line(data, x=x_axis, y=y_axis)
         st.plotly_chart(fig)
 
     elif chart_type == "Bar Chart":
+        x_axis = st.selectbox("Select X-axis", columns)
+        y_axis = st.selectbox("Select Y-axis", columns)
         fig = plt.figure(figsize=(10, 4))
         sns.barplot(x=x_axis, y=y_axis, data=data)
         st.pyplot(fig)
 
     elif chart_type == "Scatter Plot":
+        x_axis = st.selectbox("Select X-axis", columns)
+        y_axis = st.selectbox("Select Y-axis", columns)
         fig = px.scatter(data, x=x_axis, y=y_axis)
         st.plotly_chart(fig)
 
-    elif chart_type == "Histogram":
+    elif chart_type == "Histogram":  
+        x_axis = st.selectbox("Select X-axis", columns)
         fig = plt.figure(figsize=(10, 4))
         sns.histplot(data[x_axis])
         st.pyplot(fig)
 
     elif chart_type == "Box Plot":
+        x_axis = st.selectbox("Select X-axis", columns)
+        y_axis = st.selectbox("Select Y-axis", columns)
         fig = plt.figure(figsize=(10, 4))
         sns.boxplot(x=data[x_axis], y=data[y_axis])
         st.pyplot(fig)
