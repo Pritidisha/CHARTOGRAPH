@@ -20,6 +20,30 @@ uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
     st.write(data)
+    
+    missing_value_strategy = st.selectbox(
+        "Select strategy to handle missing values",
+        ["Drop rows with missing values", "Fill missing values"]
+    )
+    
+    if missing_value_strategy == "Drop rows with missing values":
+        data.dropna(inplace=True)
+    elif missing_value_strategy == "Fill missing values":
+        fill_value = st.selectbox(
+            "Select fill value",
+            ["Mean", "Median", "Mode"]
+        )
+        for column in data.columns:
+            if data[column].isnull().sum() > 0:
+                if fill_value == "Mean":
+                    data[column].fillna(data[column].mean(), inplace=True)
+                elif fill_value == "Median":
+                    data[column].fillna(data[column].median(), inplace=True)
+                elif fill_value == "Mode":
+                    data[column].fillna(data[column].mode()[0], inplace=True)
+
+    if st.checkbox("Show data after handling missing values"):
+        st.write(data)
 
     columns = data.columns.tolist()
     
